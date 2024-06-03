@@ -1,0 +1,10 @@
+{
+    "name": "skys-infinite-modules",
+    "version": "0.0.3",
+    "factorio_version": "1.1",
+    "title": "SkyKiwi's Infinite Modules",
+    "author": "SkyKiwi",
+    "homepage": "",
+    "description": "Adds more configuration options to modules, and allows you to change how many tiers of each module there are.  Huge credit to tocko73 for the original ModuleOverhaul.  Infinity icon from Stockio on Flaticon.com",
+    "dependencies": ["!bobmodules"]
+  }
