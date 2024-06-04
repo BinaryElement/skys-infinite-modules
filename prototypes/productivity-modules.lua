@@ -15,8 +15,8 @@ function new_productivity(tier)
 		tier = tier,
 		icons = {
 			{icon = icon_string, icon_size = 64},
-            {icon = "__skys-infinite-modules__/graphics/icons/"..(get_order(tier):sub(1,1))..".png", icon_size = 64, tint = {r=1,g=0,b=0,a=1},shift={-10,0}},
-            {icon = "__skys-infinite-modules__/graphics/icons/"..(get_order(tier):sub(2,2))..".png", icon_size = 64, tint = {r=1,g=0,b=0,a=1}}
+            {icon = "__skys-infinite-modules__/graphics/icons/"..(get_order(tier):sub(1,1))..".png", icon_size = 64, tint = {r=1,g=1,b=1,a=1},shift={-10,0}},
+            {icon = "__skys-infinite-modules__/graphics/icons/"..(get_order(tier):sub(2,2))..".png", icon_size = 64, tint = {r=1,g=1,b=1,a=1}}
 		},
 		stack_size = 50,
 		name = "productivity-module-"..tier,
