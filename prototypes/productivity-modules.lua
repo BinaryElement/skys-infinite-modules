@@ -1,13 +1,17 @@
 function existing_productivity(prototype, tier)
 	prototype.subgroup = "productivity-modules"
 	prototype.order = get_order(prototype.tier)
-	if get_productivity_adjust_existing() then
-		prototype.effect = {
-			productivity = {bonus = get_productivity_bonuses()[tier]},
-			consumption = {bonus = get_productivity_efficiency_penalties()[tier]},
-			speed = {bonus = get_productivity_speed_penalties()[tier] * -1},
-			pollution = {bonus = get_productivity_pollution_penalties()[tier]}
-		}
+	if get_productivity_bonus_custom_start() >= 0 or get_productivity_bonus_formula() ~= "" then
+		prototype.effect.productivity = {bonus = get_productivity_bonuses()[tier]}
+	end
+	if get_productivity_speed_penalty_custom_start() >= 0 or get_speed_penalty_formula() ~= "" then
+		prototype.effect.speed = {bonus = get_productivity_speed_penalties()[tier] * -1}
+	end
+	if get_productivity_efficiency_penalty_custom_start() >= 0 or get_efficiency_penalty_formula() ~= "" then
+		prototype.effect.consumption = {bonus = get_productivity_efficiency_penalties()[tier]}
+	end
+	if get_productivity_pollution_penalty_custom_start() >= 0 or get_productivity_pollution_penalty_formula() ~= "" then
+		prototype.effect.pollution = {bonus = get_productivity_pollution_penalties()[tier]}
 	end
 end
 function new_productivity(tier)

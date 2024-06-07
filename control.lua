@@ -1,14 +1,24 @@
-require("defines")
+require("functions")
 
-script.on_init(function()
-    local check_formulas = get_invalid_formula()
-    for i=1,#check_formulas,1 do
-        if check_formulas[i] ~= nil then
-            local moduleType = "???"
-            if i == 1 then moduleType = "speed" end
-            if i == 2 then moduleType = "efficiency" end
-            if i == 3 then moduleType = "productivity" end
-            error("Infinite Modules: erroneous maths formula for "..moduleType.." modules: "..check_formulas[i])
+--[[script.on_init(function()
+    print("[Sky's Infinite Modules] performing runtime error check...")
+    if get_delayed_error_message() ~= nil then
+        error(get_delayed_error_message())
+    end
+end)]]--
+
+script.on_event(defines.events.on_player_created,
+	function(event)
+    if get_delayed_error_message() ~= nil then
+        local player = game.get_player(event.player_index)
+        if player == nil then return end
+        if not global.skip_intro then
+            if game.is_multiplayer() then
+              player.print(get_delayed_error_message())
+            else
+              game.show_message_dialog{text = get_delayed_error_message()}
+            end
         end
+
     end
 end)

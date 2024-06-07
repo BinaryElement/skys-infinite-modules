@@ -1,9 +1,15 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.0.2
+Version: 1.1.1
+Date: 07. 06. 2024
+  Bugfixes:
+    - Fixed inconsistent results on non-aggressive error handler
+---------------------------------------------------------------------------------------------------
+Version: 1.1.0
 Date: 07. 06. 2024
   Features:
-    - Implemented option for settings to apply to base game modules
+    - Implemented option for setting the base value of tier 1 modules
     - Implemented custom formula options
+    - Implemented error handling for invalid formulas that doesn't require resetting config
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 07. 06. 2024
