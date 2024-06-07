@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 07. 06. 2024
+  Features:
+    - Implemented option for settings to apply to base game modules
+    - Implemented custom formula options
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 07. 06. 2024
+  Features:
+    - Initial release

@@ -1,6 +1,12 @@
-function existing_speed(prototype)
+function existing_speed(prototype, tier)
 	prototype.subgroup = "speed-modules"
 	prototype.order = get_order(prototype.tier)
+	if get_speed_adjust_existing() then
+		prototype.effect = {
+			speed = {bonus = get_speed_bonuses()[tier]},
+			consumption = {bonus = get_speed_penalties()[tier]}
+		}
+	end
 end
 function new_speed(tier)
 	local icon_string = get_icon_string(tier, "speed-module")

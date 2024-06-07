@@ -1,14 +1,21 @@
+require ("functions")
+
 local speed_tiers = settings.startup["max-speed-module-tier"].value
 local speed_bonus_scale = settings.startup["speed-module-bonus-scale"].value
 local speed_penalty_scale = settings.startup["speed-module-penalty-scale"].value
 local speed_bonus_scale_type = settings.startup["speed-module-bonus-scaling-type"].value
 local speed_penalty_scale_type = settings.startup["speed-module-penalty-scaling-type"].value
+local speed_adjust_existing = settings.startup["speed-module-adjust-existing"].value
+local speed_bonus_formula = settings.startup["speed-module-bonus-custom-formula"].value
+local speed_penalty_formula = settings.startup["speed-module-penalty-custom-formula"].value
 
 local efficiency_tiers = settings.startup["max-efficiency-module-tier"].value
 local efficiency_bonus_scale = settings.startup["efficiency-module-bonus-scale"].value
 local efficiency_penalty_scale = settings.startup["efficiency-module-penalty-scale"].value
 local efficiency_bonus_scale_type = settings.startup["efficiency-module-bonus-scaling-type"].value
 local efficiency_penalty_scale_type = settings.startup["efficiency-module-penalty-scaling-type"].value
+local efficiency_adjust_existing = settings.startup["efficiency-module-adjust-existing"].value
+local efficiency_bonus_formula = settings.startup["efficiency-module-bonus-custom-formula"].value
 
 local productivity_tiers = settings.startup["max-productivity-module-tier"].value
 local productivity_bonus_scale = settings.startup["productivity-module-bonus-scale"].value
@@ -19,6 +26,11 @@ local productivity_bonus_scale_type = settings.startup["productivity-module-bonu
 local productivity_speed_penalty_scale_type = settings.startup["productivity-module-speed-penalty-scaling-type"].value
 local productivity_efficiency_penalty_scale_type = settings.startup["productivity-module-speed-penalty-scaling-type"].value
 local productivity_pollution_penalty_scale_type = settings.startup["productivity-module-speed-penalty-scaling-type"].value
+local productivity_adjust_existing = settings.startup["productivity-module-adjust-existing"].value
+local productivity_bonus_formula = settings.startup["productivity-module-bonus-custom-formula"].value
+local productivity_speed_penalty_formula = settings.startup["productivity-module-speed-penalty-custom-formula"].value
+local productivity_efficiency_penalty_formula = settings.startup["productivity-module-efficiency-penalty-custom-formula"].value
+local productivity_pollution_penalty_formula = settings.startup["productivity-module-pollution-penalty-custom-formula"].value
 
 local tech_cost_scale = settings.startup["technology-cost-scale"].value
 local tech_cost_scale_type = settings.startup["technology-cost-scaling-type"].value
@@ -54,16 +66,16 @@ local efficiency_bonuses, efficiency_penalties = calculate_multiplier(efficiency
 local productivity_bonuses, productivity_penalties = calculate_multiplier(productivity_tiers, productivity_bonus_scale, productivity_bonus_scale_type, productivity_penalty_scale, productivity_penalty_scale_type, {0.04, 0.06, 0.1}, {0.4, 0.6, 0.8})]]--
 
 --calculate_multiplier(tiers, scale, scale_type, vanilla_factors)
-local speed_bonuses = calculate_multiplier(speed_tiers, speed_bonus_scale, speed_bonus_scale_type, {0.2, 0.3, 0.5})
-local speed_penalties = calculate_multiplier(speed_tiers, speed_penalty_scale, speed_penalty_scale_type, {0.5, 0.6, 0.7})
+local speed_bonuses = calculate_multiplier(speed_tiers, speed_bonus_scale, speed_bonus_scale_type, {0.2, 0.3, 0.5}, speed_adjust_existing, speed_bonus_formula, 1)
+local speed_penalties = calculate_multiplier(speed_tiers, speed_penalty_scale, speed_penalty_scale_type, {0.5, 0.6, 0.7}, speed_adjust_existing, speed_penalty_formula, 1)
 
-local efficiency_bonuses = calculate_multiplier(efficiency_tiers, efficiency_bonus_scale, efficiency_bonus_scale_type, {0.3, 0.4, 0.5})
-local efficiency_penalties = calculate_multiplier(efficiency_tiers, efficiency_penalty_scale, efficiency_penalty_scale_type, {0, 0, 0})
+local efficiency_bonuses = calculate_multiplier(efficiency_tiers, efficiency_bonus_scale, efficiency_bonus_scale_type, {0.3, 0.4, 0.5}, efficiency_adjust_existing, efficiency_bonus_formula, 2)
+local efficiency_penalties = calculate_multiplier(efficiency_tiers, efficiency_penalty_scale, efficiency_penalty_scale_type, {0, 0, 0}, efficiency_adjust_existing, "0", 2)
 
-local productivity_bonuses = calculate_multiplier(productivity_tiers, productivity_bonus_scale, productivity_bonus_scale_type, {0.04, 0.06, 0.1})
-local productivity_speed_penalties = calculate_multiplier(productivity_tiers, productivity_speed_penalty_scale, productivity_speed_penalty_scale_type, {0.05, 0.1, 0.15})
-local productivity_efficiency_penalties = calculate_multiplier(productivity_tiers, productivity_efficiency_penalty_scale, productivity_efficiency_penalty_scale_type, {0.4, 0.6, 0.8})
-local productivity_pollution_penalties = calculate_multiplier(productivity_tiers, productivity_pollution_penalty_scale, productivity_pollution_penalty_scale_type, {0.05, 0.075, 0.1})
+local productivity_bonuses = calculate_multiplier(productivity_tiers, productivity_bonus_scale, productivity_bonus_scale_type, {0.04, 0.06, 0.1}, productivity_adjust_existing, productivity_bonus_formula, 3)
+local productivity_speed_penalties = calculate_multiplier(productivity_tiers, productivity_speed_penalty_scale, productivity_speed_penalty_scale_type, {0.05, 0.1, 0.15}, productivity_adjust_existing, productivity_speed_penalty_formula, 3)
+local productivity_efficiency_penalties = calculate_multiplier(productivity_tiers, productivity_efficiency_penalty_scale, productivity_efficiency_penalty_scale_type, {0.4, 0.6, 0.8}, productivity_adjust_existing, productivity_efficiency_penalty_formula, 3)
+local productivity_pollution_penalties = calculate_multiplier(productivity_tiers, productivity_pollution_penalty_scale, productivity_pollution_penalty_scale_type, {0.05, 0.075, 0.1}, productivity_adjust_existing, productivity_pollution_penalty_formula, 3)
 
 function get_speed_tiers()
 	return speed_tiers
@@ -86,6 +98,15 @@ end
 function get_speed_penalties()
 	return speed_penalties
 end
+function get_speed_adjust_existing()
+	return speed_adjust_existing
+end
+function get_speed_bonus_formula()
+	return speed_bonus_formula
+end
+function get_speed_penalty_formula()
+	return speed_penalty_formula
+end
 
 function get_efficiency_tiers()
 	return efficiency_tiers
@@ -107,6 +128,12 @@ function get_efficiency_bonuses()
 end
 function get_efficiency_penalties()
 	return efficiency_penalties
+end
+function get_efficiency_adjust_existing()
+	return efficiency_adjust_existing
+end
+function get_efficiency_bonus_formula()
+	return efficiency_bonus_formula
 end
 
 function get_productivity_tiers()
@@ -138,6 +165,21 @@ function get_productivity_efficiency_penalties()
 end
 function get_productivity_pollution_penalties()
 	return productivity_pollution_penalties
+end
+function get_productivity_adjust_existing()
+	return productivity_adjust_existing
+end
+function get_productivity_bonus_formula()
+	return productivity_bonus_formula
+end
+function get_productivity_speed_penalty_formula()
+	return productivity_speed_penalty_formula
+end
+function get_productivity_efficiency_penalty_formula()
+	return productivity_efficiency_penalty_formula
+end
+function get_productivity_pollution_penalty_formula()
+	return productivity_pollution_penalty_formula
 end
 
 function get_tech_cost_scale()

@@ -62,6 +62,29 @@ settings = {
         allowed_values = {"Linear", "Multiplicative"},
         setting_type = "startup"
     },
+    {
+        name = "speed-module-adjust-existing",
+        type = "bool-setting",
+        order = "af",
+        default_value = false,
+        setting_type = "startup"
+    },
+    {
+        name = "speed-module-bonus-custom-formula",
+        type = "string-setting",
+        order = "ag",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
+    },
+    {
+        name = "speed-module-penalty-custom-formula",
+        type = "string-setting",
+        order = "ah",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
+    },
 --EFFICIENCY MODULES START HERE
     { 
         name = "max-efficiency-module-tier",
@@ -105,6 +128,21 @@ settings = {
         default_value = "Linear",
         allowed_values = {"Linear", "Multiplicative"},
         setting_type = "startup"
+    },
+    {
+        name = "efficiency-module-adjust-existing",
+        type = "bool-setting",
+        order = "bf",
+        default_value = false,
+        setting_type = "startup"
+    },
+    {
+        name = "efficiency-module-bonus-custom-formula",
+        type = "string-setting",
+        order = "bg",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
     },
 --PRODUCTIVITY MODULES START HERE
     { 
@@ -183,6 +221,45 @@ settings = {
         default_value = "Linear",
         allowed_values = {"Linear", "Multiplicative"},
         setting_type = "startup"
+    },
+    {
+        name = "productivity-module-adjust-existing",
+        type = "bool-setting",
+        order = "cf",
+        default_value = false,
+        setting_type = "startup",
+    },
+    {
+        name = "productivity-module-bonus-custom-formula",
+        type = "string-setting",
+        order = "cg",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
+    },
+    {
+        name = "productivity-module-speed-penalty-custom-formula",
+        type = "string-setting",
+        order = "ch",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
+    },
+    {
+        name = "productivity-module-efficiency-penalty-custom-formula",
+        type = "string-setting",
+        order = "ci",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
+    },
+    {
+        name = "productivity-module-pollution-penalty-custom-formula",
+        type = "string-setting",
+        order = "cj",
+        default_value = "",
+        setting_type = "startup",
+        allow_blank = true
     },
 -- GLOBAL SETTINGS START HERE
     {

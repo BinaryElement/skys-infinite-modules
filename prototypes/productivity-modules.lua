@@ -1,6 +1,14 @@
-function existing_productivity(prototype)
+function existing_productivity(prototype, tier)
 	prototype.subgroup = "productivity-modules"
 	prototype.order = get_order(prototype.tier)
+	if get_productivity_adjust_existing() then
+		prototype.effect = {
+			productivity = {bonus = get_productivity_bonuses()[tier]},
+			consumption = {bonus = get_productivity_efficiency_penalties()[tier]},
+			speed = {bonus = get_productivity_speed_penalties()[tier] * -1},
+			pollution = {bonus = get_productivity_pollution_penalties()[tier]}
+		}
+	end
 end
 function new_productivity(tier)
 	local icon_string = get_icon_string(tier, "productivity-module")

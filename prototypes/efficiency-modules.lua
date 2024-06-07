@@ -1,6 +1,11 @@
-function existing_efficiency(prototype)
+function existing_efficiency(prototype, tier)
 	prototype.subgroup = "effectivity-modules"
 	prototype.order = get_order(prototype.tier)
+	if get_efficiency_adjust_existing() then
+		prototype.effect = {
+			consumption = {bonus = get_efficiency_bonuses()[tier] * -1},
+		}
+	end
 end
 function new_efficiency(tier)
 	local icon_string = get_icon_string(tier, "effectivity-module")

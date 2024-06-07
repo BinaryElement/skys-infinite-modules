@@ -1,3 +1,5 @@
+require "util"
+
 for i=1,get_speed_tiers(),1 do
 	local string_concat = ""
 	if i>1 then
