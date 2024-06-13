@@ -6,5 +6,5 @@
     "author": "SkyKiwi",
     "homepage": "",
     "description": "Adds more configuration options to modules, and allows you to change how many tiers of each module there are.  Huge credit to tocko73 for the original ModuleOverhaul.  Infinity icon from Stockio on Flaticon.com",
-    "dependencies": ["!bobmodules"]
+    "dependencies": ["!bobmodules", "base >= 1.1", "sky-lib >= 1.1.0"]
   }
