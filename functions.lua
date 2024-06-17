@@ -1,32 +1,4 @@
-function get_delayed_error_message()
-	local errorDummy = game.item_prototypes["sim-error-dummy"];
-	if (errorDummy) then
-		return errorDummy.localised_description
-	end
-	return nil
-end
-
-function set_delayed_error_message(value)
-    print("[Sky's Infinite Modules] Caught error ["..value.."]")
-
-	if (data.raw["item"]["simerrordummy"]) then
-		print("[Sky's Infinite Modules]    An error is already stored.")
-	else
-		local errorDummy = 
-		{
-			icon = "__base__/graphics/icons/iron-gear-wheel.png",
-			icon_mipmaps = 4,
-			icon_size = 64,
-			name = "sim-error-dummy",
-			order = "zzzzzz",
-			stack_size = 100,
-			subgroup = "intermediate-product",
-			type = "item",
-			localised_description = value
-		}
-		data:extend({errorDummy})
-	end
-end
+require("error_util")
 
 function calculate_multiplier(tiers, scale, scale_type, vanilla_factors, custom_formula, formula_index, custom_start)
 	local factors = {vanilla_factors[1], vanilla_factors[2], vanilla_factors[3]} --TODO grab from prototype instead of hardcoded
@@ -47,7 +19,7 @@ function calculate_multiplier(tiers, scale, scale_type, vanilla_factors, custom_
 				if formula_index == 2 then err_msg = "efficiency-module-"..i end
 				if formula_index == 3 then err_msg = "productivity-module-"..i end
 				err_msg = "[Sky's Infinite Modules]: You have an erroneous maths formula for ["..err_msg.."] modules: ["..custom_formula.."].\n\nThis setting will be ignored until fixed."
-				set_delayed_error_message(err_msg)
+				error_util.set_delayed_error_message(err_msg)
 			end
 		end
 	else
