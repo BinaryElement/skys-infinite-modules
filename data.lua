@@ -1,10 +1,10 @@
-require("functions")
-require("defines")
+require("__skys-infinite-modules__.functions")
+require("__skys-infinite-modules__.defines")
 
-require("prototypes.item-groups")
-require("prototypes.speed-modules")
-require("prototypes.efficiency-modules")
-require("prototypes.productivity-modules")
-require("prototypes.modules")
+require("__skys-infinite-modules__.prototypes.item-groups")
+require("__skys-infinite-modules__.prototypes.speed-modules")
+require("__skys-infinite-modules__.prototypes.efficiency-modules")
+require("__skys-infinite-modules__.prototypes.productivity-modules")
+require("__skys-infinite-modules__.prototypes.modules")
 
-require("prototypes.technologies")
+require("__skys-infinite-modules__.prototypes.technologies")
