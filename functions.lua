@@ -1,4 +1,4 @@
-require("error_util")
+require '__skys-lib__.error-util'
 
 function calculate_multiplier(tiers, scale, scale_type, vanilla_factors, custom_formula, formula_index, custom_start)
 	local factors = {vanilla_factors[1], vanilla_factors[2], vanilla_factors[3]} --TODO grab from prototype instead of hardcoded
@@ -115,19 +115,19 @@ function get_cost(tier, module, circuit_scale, circuit_scale_type, module_scale,
 		end
 		if circuit_cost <= 0 then 
 			circuit_cost = 65535
-			set_delayed_error_message("Your settings for module "..module.."-module-"..tier.." resulted in a negative circuits cost.\n\nThis setting will be ignored, and the cost will be the maximum, until this setting is fixed.")
+			error_util.set_delayed_error_message("Settings for module "..module.."-module-"..tier.." resulted in a negative circuits cost.\n\nThis setting will be ignored.")
 		end
 		if modules_cost <= 0 then 
 			modules_cost = 65535 
-			set_delayed_error_message("Your settings for module "..module.."-module-"..tier.." resulted in a negative previous-modules cost.\n\nThis setting will be ignored, and the cost will be the maximum, until this setting is fixed.")
+			error_util.set_delayed_error_message("Settings for module "..module.."-module-"..tier.." resulted in a negative previous-modules cost.\n\nThis setting will be ignored.")
 		end
 		if circuit_cost > 65535 then 
 			circuit_cost = 65535 
-			set_delayed_error_message("Your settings for module "..module.."-module-"..tier.." resulted in a circuit crafting cost higher than 65535.  Factorio does not allow this.\n\nThis setting will be ignored, and the cost will be the maximum, until this setting is fixed.")
+			error_util.set_delayed_error_message("Settings for module "..module.."-module-"..tier.." resulted in a circuit crafting cost higher than 65535.  Factorio does not allow this.\n\nThis setting will be ignored.")
 		end
 		if modules_cost > 65535 then 
 			modules_cost = 65535 
-			set_delayed_error_message("Your settings for module "..module.."-module-"..tier.." resulted in a previous-module crafting cost higher than 65535.  Factorio does not allow this.\n\nThis setting will be ignored, and the cost will be the maximum, until this setting is fixed.")
+			error_util.set_delayed_error_message("Settings for module "..module.."-module-"..tier.." resulted in a previous-module crafting cost higher than 65535.  Factorio does not allow this.\n\nThis setting will be ignored.")
 		end
 		ingredients = {{module.."-module-"..(tier-1),modules_cost},{"advanced-circuit",circuit_cost},{"processing-unit",circuit_cost}}
 	end
