@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.2.0
+Date: 08. 18. 2024
+  Bugfixes:
+    - Now utilizes Sky's Utilities library mod
+    - Removed local duplicates of Sky's Utilities functions
+    - Fixed an issue involving non-full path requires
+---------------------------------------------------------------------------------------------------
 Version: 1.1.1
 Date: 07. 06. 2024
   Bugfixes:
