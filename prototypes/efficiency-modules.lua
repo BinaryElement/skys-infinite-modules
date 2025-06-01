@@ -1,17 +1,16 @@
 function existing_efficiency(prototype, tier)
-	prototype.subgroup = "effectivity-modules"
+	prototype.subgroup = "efficiency-modules"
 	prototype.order = get_order(prototype.tier)
 	if get_efficiency_bonus_custom_start() >= 0 or get_efficiency_bonus_formula() ~= "" then
-		print("[InfMod] Effi is a go!")
-		prototype.effect = { consumption = {bonus = get_efficiency_bonuses()[tier] * -1}}
+		prototype.effect = { consumption = get_efficiency_bonuses()[tier] * -1}
 	end
 end
 function new_efficiency(tier)
-	local icon_string = get_icon_string(tier, "effectivity-module")
+	local icon_string = get_icon_string(tier, "efficiency-module")
 	return {
-		category = "effectivity",
+		category = "efficiency",
 		effect = {
-			consumption = {bonus = get_efficiency_bonuses()[tier] * -1},
+			consumption = get_efficiency_bonuses()[tier] * -1,
 		},
 		tier = tier,
 		icons = {
@@ -20,18 +19,18 @@ function new_efficiency(tier)
             {icon = "__skys-infinite-modules__/graphics/icons/"..(get_order(tier):sub(2,2))..".png", icon_size = 64, tint = {r=1,g=1,b=1,a=1}}
 		},
 		stack_size = 50,
-		name = "effectivity-module-"..tier,
-		localised_name = {"", {"item-name.effectivity-module"}, " ", tier},
+		name = "efficiency-module-"..tier,
+		localised_name = {"", {"item-name.efficiency-module"}, " ", tostring(tier)},
 		type = "module",
-		subgroup = "effectivity-modules",
+		subgroup = "efficiency-modules",
 		order = get_order(tier),
-		localised_description = {"item-description.effectivity-module"}
+		localised_description = {"item-description.efficiency-module"}
 	},
 	{
-		ingredients = get_cost(tier, "effectivity", get_craft_circuit_scale(), get_craft_circuit_scale_type(), get_craft_module_scale(), get_craft_module_scale_type()),
-		result = "effectivity-module-"..tier,
-		name = "effectivity-module-"..tier,
-        localised_name = {"", {"item-name.effectivity-module"}, " ", tier},
+		ingredients = get_cost(tier, "efficiency", get_craft_circuit_scale(), get_craft_circuit_scale_type(), get_craft_module_scale(), get_craft_module_scale_type()),
+		results = {{name = "efficiency-module-"..tier, amount = 1, type = "item"}},
+		name = "efficiency-module-"..tier,
+        localised_name = {"", {"item-name.efficiency-module"}, " ", tostring(tier)},
         type = "recipe",
         order = get_order(tier),
         energy_required = math.floor(get_time_cost(tier)),

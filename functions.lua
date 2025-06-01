@@ -1,4 +1,5 @@
 require '__skys-lib__.error-util'
+require '__skys-lib__.log-util'
 
 function calculate_multiplier(tiers, scale, scale_type, vanilla_factors, custom_formula, formula_index, custom_start)
 	local factors = {vanilla_factors[1], vanilla_factors[2], vanilla_factors[3]} --TODO grab from prototype instead of hardcoded
@@ -18,6 +19,7 @@ function calculate_multiplier(tiers, scale, scale_type, vanilla_factors, custom_
 				if formula_index == 1 then err_msg = "speed-module-"..i end
 				if formula_index == 2 then err_msg = "efficiency-module-"..i end
 				if formula_index == 3 then err_msg = "productivity-module-"..i end
+				if formula_index == 4 then err_msg = "quality-module-"..i end
 				err_msg = "[Sky's Infinite Modules]: You have an erroneous maths formula for ["..err_msg.."] modules: ["..custom_formula.."].\n\nThis setting will be ignored until fixed."
 				error_util.set_delayed_error_message(err_msg)
 			end
@@ -87,11 +89,14 @@ function get_order(tier)
 end
 function get_icon_string(tier, module)
     local icon_string = "__base__/graphics/icons/"..module.."-3.png"
+	if module == "quality-module" then
+		icon_string = "__quality__/graphics/icons/"..module.."-3.png"
+	end
     return icon_string
 end
 function get_cost(tier, module, circuit_scale, circuit_scale_type, module_scale, module_scale_type)
 	if tier == 1 then
-		ingredients = {{"electronic-circuit", 5},{"advanced-circuit",5}}
+		ingredients = {{name = "electronic-circuit", amount = 5, type = "item"},{name = "advanced-circuit", amount = 5, type = "item"}}
 	else
 		local circuit_cost = 5 --Vanilla T3 module circuit cost
 		local modules_cost = 5 --Vanilla T3 module previous-modules cost
@@ -129,7 +134,7 @@ function get_cost(tier, module, circuit_scale, circuit_scale_type, module_scale,
 			modules_cost = 65535 
 			error_util.set_delayed_error_message("Settings for module "..module.."-module-"..tier.." resulted in a previous-module crafting cost higher than 65535.  Factorio does not allow this.\n\nThis setting will be ignored.")
 		end
-		ingredients = {{module.."-module-"..(tier-1),modules_cost},{"advanced-circuit",circuit_cost},{"processing-unit",circuit_cost}}
+		ingredients = {{name = module.."-module-"..(tier-1), amount = modules_cost, type = "item"},{name = "advanced-circuit", amount = circuit_cost, type = "item"},{name = "processing-unit", amount = circuit_cost, type = "item"}}
 	end
 	return ingredients
 end

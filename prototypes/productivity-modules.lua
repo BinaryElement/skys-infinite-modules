@@ -2,16 +2,16 @@ function existing_productivity(prototype, tier)
 	prototype.subgroup = "productivity-modules"
 	prototype.order = get_order(prototype.tier)
 	if get_productivity_bonus_custom_start() >= 0 or get_productivity_bonus_formula() ~= "" then
-		prototype.effect.productivity = {bonus = get_productivity_bonuses()[tier]}
+		prototype.effect.productivity = get_productivity_bonuses()[tier]
 	end
 	if get_productivity_speed_penalty_custom_start() >= 0 or get_speed_penalty_formula() ~= "" then
-		prototype.effect.speed = {bonus = get_productivity_speed_penalties()[tier] * -1}
+		prototype.effect.speed = get_productivity_speed_penalties()[tier] * -1
 	end
 	if get_productivity_efficiency_penalty_custom_start() >= 0 or get_efficiency_penalty_formula() ~= "" then
-		prototype.effect.consumption = {bonus = get_productivity_efficiency_penalties()[tier]}
+		prototype.effect.consumption = get_productivity_efficiency_penalties()[tier]
 	end
 	if get_productivity_pollution_penalty_custom_start() >= 0 or get_productivity_pollution_penalty_formula() ~= "" then
-		prototype.effect.pollution = {bonus = get_productivity_pollution_penalties()[tier]}
+		prototype.effect.pollution = get_productivity_pollution_penalties()[tier]
 	end
 end
 function new_productivity(tier)
@@ -19,10 +19,10 @@ function new_productivity(tier)
 	return {
 		category = "productivity",
 		effect = {
-			productivity = {bonus = get_productivity_bonuses()[tier]},
-			consumption = {bonus = get_productivity_efficiency_penalties()[tier]},
-			speed = {bonus = get_productivity_speed_penalties()[tier] * -1},
-			pollution = {bonus = get_productivity_pollution_penalties()[tier]}
+			productivity = get_productivity_bonuses()[tier],
+			consumption = get_productivity_efficiency_penalties()[tier],
+			speed = get_productivity_speed_penalties()[tier] * -1,
+			pollution = get_productivity_pollution_penalties()[tier]
 		},
 		tier = tier,
 		icons = {
@@ -32,7 +32,7 @@ function new_productivity(tier)
 		},
 		stack_size = 50,
 		name = "productivity-module-"..tier,
-		localised_name = {"", {"item-name.productivity-module"}, " ", tier},
+		localised_name = {"", {"item-name.productivity-module"}, " ", tostring(tier)},
 		type = "module",
 		subgroup = "productivity-modules",
 		order = get_order(tier),
@@ -40,9 +40,9 @@ function new_productivity(tier)
 	},
 	{
 		ingredients = get_cost(tier, "productivity", get_craft_circuit_scale(), get_craft_circuit_scale_type(), get_craft_module_scale(), get_craft_module_scale_type()),
-		result = "productivity-module-"..tier,
+		results = {{name = "productivity-module-"..tier, amount = 1, type = "item"}},
 		name = "productivity-module-"..tier,
-        localised_name = {"", {"item-name.productivity-module"}, " ", tier},
+        localised_name = {"", {"item-name.productivity-module"}, " ", tostring(tier)},
         type = "recipe",
         order = get_order(tier),
         energy_required = math.floor(get_time_cost(tier)),

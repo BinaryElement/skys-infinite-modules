@@ -40,6 +40,17 @@ local productivity_speed_penalty_formula = settings.startup["productivity-module
 local productivity_efficiency_penalty_formula = settings.startup["productivity-module-efficiency-penalty-custom-formula"].value
 local productivity_pollution_penalty_formula = settings.startup["productivity-module-pollution-penalty-custom-formula"].value
 
+local quality_tiers = settings.startup["max-quality-module-tier"].value
+local quality_bonus_scale = settings.startup["quality-module-bonus-scale"].value
+local quality_penalty_scale = settings.startup["quality-module-penalty-scale"].value
+local quality_bonus_scale_type = settings.startup["quality-module-bonus-scaling-type"].value
+local quality_penalty_scale_type = settings.startup["quality-module-penalty-scaling-type"].value
+local quality_bonus_custom_start = settings.startup["quality-module-bonus-custom-start"].value
+local quality_penalty_custom_start = settings.startup["quality-module-penalty-custom-start"].value
+local quality_bonus_formula = settings.startup["quality-module-bonus-custom-formula"].value
+local quality_penalty_formula = settings.startup["quality-module-penalty-custom-formula"].value
+
+
 
 local tech_cost_scale = settings.startup["technology-cost-scale"].value
 local tech_cost_scale_type = settings.startup["technology-cost-scaling-type"].value
@@ -85,6 +96,9 @@ local productivity_bonuses = calculate_multiplier(productivity_tiers, productivi
 local productivity_speed_penalties = calculate_multiplier(productivity_tiers, productivity_speed_penalty_scale, productivity_speed_penalty_scale_type, {0.05, 0.1, 0.15}, productivity_speed_penalty_formula, 3, productivity_speed_penalty_custom_start)
 local productivity_efficiency_penalties = calculate_multiplier(productivity_tiers, productivity_efficiency_penalty_scale, productivity_efficiency_penalty_scale_type, {0.4, 0.6, 0.8}, productivity_efficiency_penalty_formula, 3, productivity_efficiency_penalty_custom_start)
 local productivity_pollution_penalties = calculate_multiplier(productivity_tiers, productivity_pollution_penalty_scale, productivity_pollution_penalty_scale_type, {0.05, 0.075, 0.1}, productivity_pollution_penalty_formula, 3, productivity_pollution_penalty_custom_start)
+
+local quality_bonuses = calculate_multiplier(quality_tiers, quality_bonus_scale, quality_bonus_scale_type, {0.1, 0.2, 0.25}, quality_bonus_formula, 4, quality_bonus_custom_start)
+local quality_penalties = calculate_multiplier(quality_tiers, quality_penalty_scale, quality_penalty_scale_type, {0.05, 0.05, 0.05}, quality_penalty_formula, 4, quality_penalty_custom_start)
 
 function get_speed_tiers()
 	return speed_tiers
@@ -207,6 +221,40 @@ function get_productivity_efficiency_penalty_formula()
 end
 function get_productivity_pollution_penalty_formula()
 	return productivity_pollution_penalty_formula
+end
+
+function get_quality_tiers()
+	return quality_tiers
+end
+function get_quality_bonus_scale()
+	return quality_bonus_scale
+end
+function get_quality_penalty_scale()
+	return quality_penalty_scale
+end
+function get_quality_bonus_scale_type()
+	return quality_bonus_scale_type
+end
+function get_quality_penalty_scale_type()
+	return quality_penalty_scale_type
+end
+function get_quality_bonuses()
+	return quality_bonuses
+end
+function get_quality_penalties()
+	return quality_penalties
+end
+function get_quality_bonus_custom_start()
+	return quality_bonus_custom_start
+end
+function get_quality_penalty_custom_start()
+	return quality_penalty_custom_start
+end
+function get_quality_bonus_formula()
+	return quality_bonus_formula
+end
+function get_quality_penalty_formula()
+	return quality_penalty_formula
 end
 
 function get_tech_cost_scale()

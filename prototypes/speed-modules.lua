@@ -2,10 +2,10 @@ function existing_speed(prototype, tier)
 	prototype.subgroup = "speed-modules"
 	prototype.order = get_order(prototype.tier)
 	if get_speed_bonus_custom_start() >= 0 or get_speed_bonus_formula() ~= "" then
-		prototype.effect.speed = {bonus = get_speed_bonuses()[tier]}
+		prototype.effect.speed = get_speed_bonuses()[tier]
 	end
 	if get_speed_penalty_custom_start() or get_speed_penalty_formula() ~= "" then
-		prototype.effect.consumption = {bonus = get_speed_penalties()[tier]}
+		prototype.effect.consumption = get_speed_penalties()[tier]
 	end
 end
 function new_speed(tier)
@@ -13,8 +13,8 @@ function new_speed(tier)
 	return {
 		category = "speed",
 		effect = {
-			speed = {bonus = get_speed_bonuses()[tier]},
-			consumption = {bonus = get_speed_penalties()[tier]}
+			speed = get_speed_bonuses()[tier],
+			consumption = get_speed_penalties()[tier]
 		},
 		tier = tier,
 		icons = {
@@ -24,7 +24,7 @@ function new_speed(tier)
 		},
 		stack_size = 50,
 		name = "speed-module-"..tier,
-		localised_name = {"", {"item-name.speed-module"}, " ", tier},
+		localised_name = {"", {"item-name.speed-module"}, " ", tostring(tier)},
 		type = "module",
 		subgroup = "speed-modules",
 		order = get_order(tier),
@@ -32,9 +32,9 @@ function new_speed(tier)
 	},
 	{
 		ingredients = get_cost(tier, "speed", get_craft_circuit_scale(), get_craft_circuit_scale_type(), get_craft_module_scale(), get_craft_module_scale_type()),
-		result = "speed-module-"..tier,
+		results = {{name = "speed-module-"..tier, amount = 1, type = "item"}},
 		name = "speed-module-"..tier,
-        localised_name = {"", {"item-name.speed-module"}, " ", tier},
+        localised_name = {"", {"item-name.speed-module"}, " ", tostring(tier)},
         type = "recipe",
         order = get_order(tier),
         energy_required = math.floor(get_time_cost(tier)),

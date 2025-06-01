@@ -15,7 +15,7 @@ data:extend({
     },
     {
         type = "item-subgroup",
-        name = "effectivity-modules",
+        name = "efficiency-modules",
         group = "modules",
         order = "b"
     },
@@ -24,5 +24,11 @@ data:extend({
         name = "productivity-modules",
         group = "modules",
         order = "c"
+    },
+    {
+        type = "item-subgroup",
+        name = "quality-modules",
+        group = "modules",
+        order = "d"
     }
 })

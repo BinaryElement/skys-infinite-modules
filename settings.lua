@@ -316,6 +316,86 @@ settings = {
         minimum_value = -1,
         setting_type = "startup",
     },
+    --QUALITY MODULES START HERE
+        { 
+            name = "max-quality-module-tier",
+            type = "int-setting",
+            order = "mod4-1",
+            default_value = 10,
+            minimum_value = 3,
+            maximum_value = 50,
+            setting_type = "startup"
+        },
+        {
+            name = "quality-module-bonus-scale",
+            type = "double-setting",
+            order = "mod4-2a",
+            default_value = 0.05,
+            minimum_value = -1000,
+            maximum_value = 1000,
+            setting_type = "startup"
+        },
+        {
+            name = "quality-module-bonus-scaling-type",
+            type = "string-setting",
+            order = "mod4-2b",
+            default_value = "Linear",
+            allowed_values = {"Linear", "Multiplicative"},
+            setting_type = "startup"
+        },
+        {
+            name = "quality-module-penalty-scale",
+            type = "double-setting",
+            order = "mod4-3a",
+            default_value = 0,
+            minimum_value = -1000,
+            maximum_value = 1000,
+            setting_type = "startup",
+            hidden = true
+        },
+        {
+            name = "quality-module-penalty-scaling-type",
+            type = "string-setting",
+            order = "mod4-3b",
+            default_value = "Linear",
+            allowed_values = {"Linear", "Multiplicative"},
+            setting_type = "startup",
+            hidden = true
+        },
+        {
+            name = "quality-module-bonus-custom-formula",
+            type = "string-setting",
+            order = "mod4-4a",
+            default_value = "",
+            setting_type = "startup",
+            allow_blank = true
+        },
+        {
+            name = "quality-module-bonus-custom-start",
+            type = "double-setting",
+            order = "mod4-4b",
+            default_value = -1,
+            minimum_value = -1,
+            setting_type = "startup",
+        },
+        {
+            name = "quality-module-penalty-custom-formula",
+            type = "string-setting",
+            order = "mod4-5a",
+            default_value = "",
+            setting_type = "startup",
+            allow_blank = true,
+            hidden = true
+        },
+        {
+            name = "quality-module-penalty-custom-start",
+            type = "double-setting",
+            order = "mod4-5b",
+            default_value = -1,
+            minimum_value = -1,
+            setting_type = "startup",
+            hidden = true
+        },
 -- GLOBAL SETTINGS START HERE
     {
         name = "technology-cost-scale",
